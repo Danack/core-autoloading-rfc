@@ -8,7 +8,9 @@ function get_namespace_code(string $namespace)
 
 namespace $namespace {
     function testing() {
-        echo "strlen is " . strlen("foobar") . "\n";
+         \$result = "strlen is " . strlen("foobar") . "\n";
+         // echo \$result;
+         return \$result;
     }
 }
 
@@ -33,13 +35,13 @@ function my_function_loader(string $function_name) {
 
 if (rand(0,1) == 0) {
     // actually setup function autoloader
-    echo "autoloarder funct\n";
+    echo "autoloader funct\n";
     autoload_register_function(my_function_loader(...));
 } 
 else {
    // deliberately wrong, but similar, to make equivalent
    // number of operations in setup.
-   echo "autoloarder class\n";
+   echo "autoloader class\n";
    autoload_register_class(my_function_loader(...));
 }
 
@@ -68,7 +70,7 @@ $number_of_namespaces = 10;
 
 // The function lookup happens once, so making this number
 // higher makes the overhead be relatively smaller.
-$invocations_per_namespace = 10;
+$invocations_per_namespace = 1;
 
 for ($j=0; $j < $invocations_per_namespace; $j += 1) {
     for ($i = 0; $i < $number_of_namespaces; $i += 1) {
